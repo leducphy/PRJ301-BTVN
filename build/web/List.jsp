@@ -9,7 +9,7 @@
     <body>
 
         <form action="list" method="post">
-            <input type="text" name="search" value="${search}" placeholder="Search by name">
+            <input type="text" name="search" placeholder="Search by name">
             <button type="submit" >Search</button>
         </form>
 
@@ -34,6 +34,7 @@
                         <td><a href="#">EDIT</a></td>
                     </tr>
                 </c:forEach>
+
             </tbody>
         </table>
 
