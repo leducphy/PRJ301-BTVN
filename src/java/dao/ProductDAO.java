@@ -76,7 +76,55 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public int updateProduct(int id, Product p) {
+        int result = 0;
+        try {
+            String sql = "update Product  set name = ?, price = ?, quantity = ? where id = ? ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, p.getName());
+            ps.setDouble(2, p.getPrice());
+            ps.setInt(3, p.getQuantity());
+            ps.setInt(4, id);
+
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+
+        if (result != 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void deleteProduct(int id) {
+        try {
+            String sql = "delete Product where id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+        public void addProduct(Product p) {
+        try {
+            String sql = "insert into Product(id, name, price, quantity) values (?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, p.getId());
+            ps.setString(2, p.getName());
+            ps.setDouble(3, p.getPrice());
+            ps.setInt(4, p.getQuantity());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(new ProductDAO().getProductByName("sam").toString());
+        Product p = new Product( 6, "Vsmart 5", 100, 1000);
+        
+        new ProductDAO().addProduct(p);
+        
+        System.out.println(new ProductDAO().getProducts().toString());
     }
 }

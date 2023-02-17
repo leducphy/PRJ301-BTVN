@@ -31,12 +31,18 @@
                         <td>${p.getName()}</td>
                         <td>${p.getPrice()}$</td>
                         <td>${p.getQuantity()}</td>
-                        <td><a href="#">EDIT</a></td>
+                        <td>
+                            <a href="edit?id=${p.getId()}">EDIT</a>
+                            <a href="delete?id=${p.getId()}">DELETE</a>
+                        </td>
                     </tr>
                 </c:forEach>
 
             </tbody>
         </table>
-
+        
+        <label>${msg}</label>
+        
+        <a href="add">Create Product</a>
     </body>
 </html>
